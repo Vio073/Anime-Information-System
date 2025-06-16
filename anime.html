@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Information System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎌 Anime Information System</h1>
+            <p>Discover and explore anime with our interactive web application</p>
+        </header>
+
+        <div class="controls">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search anime by title..." />
+                <button id="searchBtn" onclick="searchAnime()">Search</button>
+                <button id="showFavoritesBtn" onclick="toggleFavoritesSection()">⭐ My Favorites</button>
+            </div>
+            
+            <div class="filter-container">
+                <select id="genreFilter" onchange="filterByGenre()">
+                    <option value="">All Genres</option>
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Thriller">Thriller</option>
+                </select>
+                
+                <select id="statusFilter" onchange="filterByStatus()">
+                    <option value="">All Status</option>
+                    <option value="Finished Airing">Finished Airing</option>
+                    <option value="Currently Airing">Currently Airing</option>
+                    <option value="Not yet aired">Not yet aired</option>
+                </select>
+                
+                <select id="sortFilter" onchange="sortData()">
+                    <option value="">Sort by...</option>
+                    <option value="title">Title (A-Z)</option>
+                    <option value="score">Score (High-Low)</option>
+                    <option value="year">Year (New-Old)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Loading anime data...</p>
+        </div>
+
+        <div id="error" class="error hidden">
+            <p>Failed to load data. Please try again.</p>
+            <button onclick="loadPopularAnime()">Retry</button>
+        </div>
+
+        <div id="resultsCount" class="results-count hidden">
+            <p>Found <span id="count">0</span> anime</p>
+        </div>
+
+        <div id="favoritesSection" class="hidden">
+            <h2>⭐ My Favorite Anime</h2>
+            <div id="favoritesGrid" class="anime-grid"></div>
+        </div>
+
+        <div id="animeGrid" class="anime-grid">
+        </div>
+
+        <div id="pagination" class="pagination hidden">
+            <button id="prevBtn" onclick="changePage(-1)">Previous</button>
+            <span id="pageInfo">Page 1</span>
+            <button id="nextBtn" onclick="changePage(1)">Next</button>
+        </div>
+
+        <div id="animeModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="modalBody">
+                </div>
+            </div>
+        </div>
+
+        <div id="ratingModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" onclick="closeRatingModal()">&times;</span>
+                <div id="ratingModalBody">
+                    <h2>Rate this Anime</h2>
+                    <div class="rating-stars">
+                        <span onclick="setRating(1)">★</span>
+                        <span onclick="setRating(2)">★</span>
+                        <span onclick="setRating(3)">★</span>
+                        <span onclick="setRating(4)">★</span>
+                        <span onclick="setRating(5)">★</span>
+                    </div>
+                    <textarea id="reviewText" placeholder="Write your review..."></textarea>
+                    <button onclick="submitReview()">Submit Review</button>
+                    <div id="userReviews"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
